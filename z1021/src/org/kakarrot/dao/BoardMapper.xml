@@ -14,9 +14,36 @@ select * from tbl_board_sample where pno = #{pno}
 </select>
 
 <insert id="insertOne" >
-insert into tbl_board_sample values(seq_board_sample.nextval,#{view_count},#{tilte},
-#{writer},#{content},sysdate,sysdate )
+insert into tbl_board_sample 
+values(seq_board_sample.nextval
+,#{tilte},#{writer},#{content},0,sysdate,sysdate )
 </insert>
+
+<select id="selectList" resultType="org.kakarrot.domain.BoardVO">
+<![CDATA[
+select * from
+(select rownum rn,tb.* from 
+(select * from tbl_board_sample order by pno desc) tb 
+where rownum <= #{amount}*#{page})
+where rn >=(#{page}-1)*#{amount}]]>
+</select>
+
+<select id="getCount" resultType="Integer">
+<![CDATA[
+select count(*) from tbl_board_sample
+]]>
+</select>
+
+<update id="update">
+	UPDATE tbml_board_sample
+	SET view_count = #{view_count}, tilte = #{tilte}, writer = #{writer},content = #{content}, updatedate = sysdate
+	where pno = #{pno}
+
+</update>
+<delete id="delete">
+	delete tbl_board_sample where pno =#{pno}
+</delete>
+
   
   
   
