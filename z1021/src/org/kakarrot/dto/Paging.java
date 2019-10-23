@@ -10,7 +10,22 @@ public class Paging {
 		this.page = 1;
 		this.amount = 10;
 	}
-
+	
+	public Paging(String pagstr, String amountstr) {
+		try {
+			this.page = Integer.parseInt(pagstr);
+			
+		} catch (Exception e) {
+			page =1;
+			
+		}
+		try {
+			this.amount = Integer.parseInt(amountstr);
+		} catch (Exception e) {
+			amount = 10;
+		}
+	}
+	
 	public int getPage() {
 		return page;
 	}

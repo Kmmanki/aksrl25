@@ -8,7 +8,7 @@ import lombok.Data;
 public class BoardVO {
 	
 	private Long pno ,view_count;
-	private String tilte, writer, content;
+	private String title, writer, content;
 	private Date regdate,updatedate;
 
 }
