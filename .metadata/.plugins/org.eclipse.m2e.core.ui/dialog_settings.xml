@@ -2,6 +2,8 @@
 <section name="Workbench">
 	<section name="wizardPage">
 		<list key="groupId">
+			<item value="test"/>
+			<item value="1023"/>
 			<item value="z1021"/>
 			<item value="1021"/>
 			<item value="z1080"/>
@@ -9,6 +11,8 @@
 		<list key="name">
 		</list>
 		<list key="artifactId">
+			<item value="test"/>
+			<item value="1023"/>
 			<item value="z1021"/>
 			<item value="1021"/>
 			<item value="z1080"/>

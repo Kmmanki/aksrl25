@@ -12,11 +12,13 @@
 <h1>LIST</h1>
 <c:forEach var = "vo" items="${list}">
 ${vo.pno}
-${vo.title}
+<a href="/board/view?pno=${vo.pno}&page=${page}" >${vo.title}</a>
 ${vo.writer}
 <br>
 
 </c:forEach>
-
+    <form action="/board/register">
+    <input type="submit" value="글쓰기">
+    </form>
 </body>
 </html>

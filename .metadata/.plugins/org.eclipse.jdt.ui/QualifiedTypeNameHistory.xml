@@ -17,13 +17,21 @@
 <fullyQualifiedTypeName name="org.kakarrot.dao.BoardDAO"/>
 <fullyQualifiedTypeName name="org.kakarrot.domain.BoardVO"/>
 <fullyQualifiedTypeName name="lombok.Data"/>
-<fullyQualifiedTypeName name="java.util.List"/>
-<fullyQualifiedTypeName name="org.kakarrot.dto.Paging"/>
 <fullyQualifiedTypeName name="org.zerock.anno.Job"/>
-<fullyQualifiedTypeName name="java.lang.annotation.Target"/>
 <fullyQualifiedTypeName name="java.lang.annotation.ElementType"/>
+<fullyQualifiedTypeName name="org.kakarrot.controller.RequestMapping"/>
+<fullyQualifiedTypeName name="lombok.Getter"/>
+<fullyQualifiedTypeName name="lombok.ToString"/>
+<fullyQualifiedTypeName name="javax.servlet.annotation.MultipartConfig"/>
+<fullyQualifiedTypeName name="java.util.Collection"/>
+<fullyQualifiedTypeName name="javax.servlet.http.Part"/>
+<fullyQualifiedTypeName name="java.lang.annotation.Target"/>
 <fullyQualifiedTypeName name="java.lang.annotation.Retention"/>
 <fullyQualifiedTypeName name="java.lang.annotation.RetentionPolicy"/>
+<fullyQualifiedTypeName name="javax.servlet.http.HttpServlet"/>
+<fullyQualifiedTypeName name="java.rmi.server.UID"/>
 <fullyQualifiedTypeName name="java.lang.reflect.Method"/>
-<fullyQualifiedTypeName name="org.kakarrot.controller.RequestMapping"/>
+<fullyQualifiedTypeName name="org.test.requestmapping.RequestMapping"/>
+<fullyQualifiedTypeName name="org.kakarrot.dto.Paging"/>
+<fullyQualifiedTypeName name="java.util.List"/>
 </qualifiedTypeNameHistroy>

@@ -16,7 +16,7 @@ select * from tbl_board_sample where pno = #{pno}
 <insert id="insertOne" >
 insert into tbl_board_sample 
 values(seq_board_sample.nextval
-,#{tilte},#{writer},#{content},0,sysdate,sysdate )
+,#{title},#{writer},#{content},0,sysdate,sysdate )
 </insert>
 
 <select id="selectList" resultType="org.kakarrot.domain.BoardVO">

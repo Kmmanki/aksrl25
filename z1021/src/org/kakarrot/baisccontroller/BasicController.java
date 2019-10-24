@@ -15,7 +15,6 @@ public abstract class BasicController extends HttpServlet{
 
 	@Override
 	protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		req.setCharacterEncoding("UTF-8"); // 값 넘길 때 인코딩
 		Class<?> clz = this.getClass();
 		String clpath = req.getRequestURI();
 		String cltype = req.getMethod();
@@ -26,21 +25,30 @@ public abstract class BasicController extends HttpServlet{
 			
 			for(Method m : methods) {
 				RequestMapping anno = m.getDeclaredAnnotation(RequestMapping.class);
+//				System.out.println("--------------------------------------------------------");
+//				System.out.println("clpath : "+clpath);
+//				System.out.println("anno.value() : "+anno.value());
+//				System.out.println("=========================================================");
+//				System.out.println("cltype : "+cltype);
+//				System.out.println("anno.type : "+anno.type());
+//				System.out.println("--------------------------------------------------------");
 				if(clpath.equals(anno.value()) && cltype.equals(anno.type())) {
 					target = m;
 					break;
 				}
 				
 			}
+			
 			String result = (String)target.invoke(this, req, resp); // 알맞는 메소드 실행 
-			System.out.println(result);
 			
 			if(result.startsWith("redirect:")){ // result 가 redirect: 로 시작한다면 
 				resp.sendRedirect(result.substring(10));  // redirect 한다.  매개변수 위치로 이동한다.
 //				/WEB-INF/views/board/list.jsp
 			}else {
+				System.out.println("/WEB-INF/views"+result+".jsp");
 				req.getRequestDispatcher("/WEB-INF/views"+result+".jsp")// redirec가 아니라면 result로 forward 이동한다.
 				.forward(req, resp);
+				
 			}
 			
 			
