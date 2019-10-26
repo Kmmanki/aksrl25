@@ -33,10 +33,14 @@ public class UploadController extends HttpServlet {
 		List<String> fnames = new ArrayList<String>(); 
 		
 		parts.forEach(part ->{
-			if(part.getName().equals("fs")) {
-				System.out.println("파일명: "+part.getSubmittedFileName());
-				System.out.println("파일 사이즈: "+part.getSize());
-				
+			
+			System.out.println("파일이름은: "+part.getSubmittedFileName());
+			
+			
+			if(part.getName().equals("fs") && !(part.getSubmittedFileName().equals(""))) {
+//				System.out.println("파일명: "+part.getSubmittedFileName());
+//				System.out.println("파일 사이즈: "+part.getSize());
+//				
 			try {
 				InputStream in = part.getInputStream();
 				String fname = System.currentTimeMillis()+"_"+part.getSubmittedFileName();
@@ -53,7 +57,7 @@ public class UploadController extends HttpServlet {
 		});
 		req.setAttribute("fnames", fnames);
 		System.out.println("내 생각에는  여기가 1번");
-//		System.out.println(req.getAttribute("fnames"));
+		System.out.println(req.getAttribute("fnames"));
 		req.getRequestDispatcher("/board/register").forward(req, resp);
 //		
 //		
