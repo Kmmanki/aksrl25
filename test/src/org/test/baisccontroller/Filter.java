@@ -1,7 +1,6 @@
-package org.kakarrot.filrer;
+package org.test.baisccontroller;
 
 import java.io.IOException;
-import javax.servlet.Filter;
 import javax.servlet.FilterChain;
 import javax.servlet.FilterConfig;
 import javax.servlet.ServletException;
@@ -10,18 +9,18 @@ import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.xml.ws.Response;
+import javax.servlet.http.HttpSession;
 
 /**
- * Servlet Filter implementation class KoreanFilter
+ * Servlet Filter implementation class Filter
  */
-@WebFilter("/*")
-public class KoreanFilter implements Filter {
+@WebFilter("/Filter")
+public class Filter implements javax.servlet.Filter {
 
     /**
      * Default constructor. 
      */
-    public KoreanFilter() {
+    public Filter() {
         // TODO Auto-generated constructor stub
     }
 
@@ -35,25 +34,21 @@ public class KoreanFilter implements Filter {
 	/**
 	 * @see Filter#doFilter(ServletRequest, ServletResponse, FilterChain)
 	 */
-	public void doFilter(ServletRequest request, 
-			ServletResponse response, 
-			FilterChain chain) throws IOException, ServletException {
-		
-			System.out.println("Korean filter Work-----------------------------------------");
-		
-			request.setCharacterEncoding("UTF-8");
-			
-			HttpServletResponse res = (HttpServletResponse)response;
-			
-//			res.sendRedirect("/");
-			
-//			return;
-			chain.doFilter(request, response);
-	}
+	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
 
-	/**
-	 * @see Filter#init(FilterConfig)
-	 */
+		HttpServletRequest req = (HttpServletRequest)request;
+		HttpServletResponse resp = (HttpServletResponse)response;
+		HttpSession session = req.getSession();
+		
+		
+		if(session.getAttribute("member")== null) {
+			resp.sendRedirect("/login");
+			return;
+		}
+		
+		chain.doFilter(request, response);
+	}
+	
 	public void init(FilterConfig fConfig) throws ServletException {
 		// TODO Auto-generated method stub
 	}

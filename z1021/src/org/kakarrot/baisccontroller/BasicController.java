@@ -38,9 +38,12 @@ public abstract class BasicController extends HttpServlet{
 				}
 				
 			}
+			System.out.println("bisc: "+req.getAttribute("fnames"));
 			
+			
+			System.out.println("내 생각에는  여기가 2번");
 			String result = (String)target.invoke(this, req, resp); // 알맞는 메소드 실행 
-			
+			System.out.println("타겟 생성됨");
 			if(result.startsWith("redirect:")){ // result 가 redirect: 로 시작한다면 
 				resp.sendRedirect(result.substring(10));  // redirect 한다.  매개변수 위치로 이동한다.
 //				/WEB-INF/views/board/list.jsp

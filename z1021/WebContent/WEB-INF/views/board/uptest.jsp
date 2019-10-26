@@ -7,12 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-<h1>veiw</h1>
-<h2>제목 ${vo.title}</h2>
-<h2>작성자 ${vo.writer}</h2>
-<h2>내용 ${vo.content}</h2>
-
-<a href="/board/list?page=${param.page}"><input type="submit" value = "목록으로"></a>
-
+<h1>jsp 까지 들어오</h1>
+	${fnames}
 </body>
 </html>

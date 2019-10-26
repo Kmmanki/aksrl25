@@ -15,7 +15,7 @@ select * from tbl_board_sample where pno = #{pno}
 
 <insert id="insertOne" >
 insert into tbl_board_sample 
-values(seq_board_sample.nextval
+values(#{pno}
 ,#{title},#{writer},#{content},0,sysdate,sysdate )
 </insert>
 
@@ -44,8 +44,17 @@ select count(*) from tbl_board_sample
 	delete tbl_board_sample where pno =#{pno}
 </delete>
 
+<select id="total" resultType="int">
+select count(pno) from tbml_board_sample; 
+</select>
+
   
+  <select id="nextval" resultType="int">
+select seq_board_sample.nextval from dual
+</select>
   
-  
+  <insert id="insertfile" >
+	insert into tbl_uploadfile 	values(#{board_no}	,#{f_name})
+</insert>
   
 </mapper>

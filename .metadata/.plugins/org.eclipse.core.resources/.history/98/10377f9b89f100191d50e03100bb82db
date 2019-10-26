@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?><project-modules id="moduleCoreId" project-version="1.5.0">
-    <wb-module deploy-name="z1080">
-        <wb-resource deploy-path="/" source-path="/WebContent"/>
-        <property name="context-root" value="z1080"/>
-        <property name="java-output-path" value="/z1080/build/classes"/>
-    </wb-module>
-</project-modules>

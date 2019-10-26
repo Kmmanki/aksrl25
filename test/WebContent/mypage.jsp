@@ -7,12 +7,14 @@
 <title>Insert title here</title>
 </head>
 <body>
-<h1>veiw</h1>
-<h2>제목 ${vo.title}</h2>
-<h2>작성자 ${vo.writer}</h2>
-<h2>내용 ${vo.content}</h2>
-
-<a href="/board/list?page=${param.page}"><input type="submit" value = "목록으로"></a>
-
+<h1>저장된 정보 확인</h1>
+<%
+	Object obj = session.getAttribute("cer");
+	if(obj==null){
+		out.println("<h1>fake.jsp 방문해라</h1>");
+	}else{
+		out.println("<h1>"+obj+"</h1>");
+	}
+%>
 </body>
 </html>

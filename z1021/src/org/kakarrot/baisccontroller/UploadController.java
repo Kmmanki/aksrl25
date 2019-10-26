@@ -3,7 +3,9 @@ package org.kakarrot.baisccontroller;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
@@ -28,24 +30,33 @@ public class UploadController extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		Collection<Part> parts = req.getParts();
+		List<String> fnames = new ArrayList<String>(); 
+		
 		parts.forEach(part ->{
-			System.out.println(part.getSubmittedFileName());
-			System.out.println(part.getSize());
-			
+			if(part.getName().equals("fs")) {
+				System.out.println("파일명: "+part.getSubmittedFileName());
+				System.out.println("파일 사이즈: "+part.getSize());
+				
 			try {
 				InputStream in = part.getInputStream();
+				String fname = System.currentTimeMillis()+"_"+part.getSubmittedFileName();
+				fnames.add(fname);
 				File file =
-						new File("C:\\zzz\\upload\\"+(System.currentTimeMillis())+"_"+part.getSubmittedFileName());
+						new File("C:\\zzz\\upload\\"+fname);
 				FileUtils.copyInputStreamToFile(in, file);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
+			}
 			
 			
 		});
-		
-		
-		
+		req.setAttribute("fnames", fnames);
+		System.out.println("내 생각에는  여기가 1번");
+//		System.out.println(req.getAttribute("fnames"));
+		req.getRequestDispatcher("/board/register").forward(req, resp);
+//		
+//		
 	}
        
     

@@ -2,9 +2,14 @@ package org.kakarrot.dao;
 
 import java.util.List;
 
+import javax.servlet.Servlet;
+
+import org.apache.catalina.core.ApplicationContext;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
+import org.apache.tomcat.util.http.fileupload.FileUpload;
 import org.kakarrot.domain.BoardVO;
+import org.kakarrot.domain.FileUploadVO;
 import org.kakarrot.dto.Paging;
 
 public class BoardDAOImpl implements BoardDAO {
@@ -21,7 +26,6 @@ public class BoardDAOImpl implements BoardDAO {
 			e.printStackTrace();
 
 		}
-
 		return W;
 	}
 
@@ -91,6 +95,30 @@ public class BoardDAOImpl implements BoardDAO {
 			e.printStackTrace();
 		}
 		return count;
+	}
+
+	@Override
+	public int getnextval() {
+		Integer nextval = null;
+		try (SqlSession session = sqlsessionfactory.openSession()) {
+			nextval = session.selectOne("org.kakarrot.dao.BoardMapper.nextval");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return nextval;
+	}
+
+	@Override
+	public boolean insertfile(FileUploadVO fvo) {
+		boolean W =false;
+		try (SqlSession session = sqlsessionfactory.openSession()) {
+			session.insert("org.kakarrot.dao.BoardMapper.insertfile", fvo);
+			session.commit();
+			 W =true;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return W;
 	}
 
 }

@@ -1,7 +1,7 @@
 package org.kakarrot.dto;
 
 import lombok.Data;
-
+@Data
 public class Paging {
 	private int page;
 	private int amount;

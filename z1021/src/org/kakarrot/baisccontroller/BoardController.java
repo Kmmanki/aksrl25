@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServletResponse;
 import org.kakarrot.dao.BoardDAO;
 import org.kakarrot.dao.BoardDAOImpl;
 import org.kakarrot.domain.BoardVO;
+import org.kakarrot.domain.FileUploadVO;
+import org.kakarrot.dto.PageMaker;
 import org.kakarrot.dto.Paging;
 import org.kakarrot.requestmapping.RequestMapping;
 
@@ -28,9 +30,13 @@ public class BoardController extends BasicController {
 	public String getList(HttpServletRequest req, HttpServletResponse resp) {
 		Paging p = new Paging(req.getParameter("page"),req.getParameter("amount"));
 		List<BoardVO> list =bd.getList(p);
+		PageMaker pm = new PageMaker(p, bd.getCount());
 		req.setAttribute("page", p);
-		System.out.println("page: "+p.getPage());
+		req.setAttribute("pm", pm);
 		req.setAttribute("list", list);
+		
+		
+		
 		return "/board/list";
 	}
 
@@ -39,8 +45,6 @@ public class BoardController extends BasicController {
 	public String getView(HttpServletRequest req, HttpServletResponse resp) {
 			Long pno = Long.parseLong(req.getParameter("pno"));
 		BoardVO a = bd.selectOne(pno);
-	
-		System.out.println("page: "+p.getPage());
 		req.setAttribute("vo", a);
 		return "/board/view";
 	}
@@ -56,14 +60,38 @@ public class BoardController extends BasicController {
 	@RequestMapping(value = "/board/register", type = "POST")
 	public String setRegister(HttpServletRequest req, HttpServletResponse resp) {
 		//파라미터 수집하자
+		//select nextval 만들기
+		Long nval =(long)bd.getnextval();
+		System.out.println("내 생각에는  여기가 3번");
+//		System.out.println("board: "+req.getAttribute("fnames"));
+		List<String> li  = (List<String>) req.getAttribute("fnames");
+		
+		//보드 인서트
 		BoardVO vo = new BoardVO();
+		vo.setPno(nval); // 여기 수정 요망
 		vo.setTitle(req.getParameter("title"));
 		vo.setWriter(req.getParameter("writer"));
 		vo.setContent(req.getParameter("content"));
 		System.out.println(bd.insert(vo));
+
+		//nval,li 이용해서 table_uploadfile
+//		System.out.println("fname test: -------------------------------");
+		if(li != null) { // 파일이 있다면 
+			FileUploadVO fvo = new FileUploadVO();
+			for(String filename : li) {
+				fvo.setBoard_no(nval);
+				fvo.setF_name(filename);
+				
+				System.out.println("파일 insert 성공 했니?:   "+bd.insertfile(fvo));
+				
+			}
+			
+		}
 		
 		
-		return "redirect:/list";
+		
+		
+		return "redirect:/board/list";
 	}
 	
 	
