@@ -6,11 +6,21 @@
   
 <mapper namespace="org.kakarrot.dao.BoardMapper">
 
+<resultMap type="org.kakarrot.domain.BoardVO" id="selectOneResult">
+	<id property="pno" />
+	<result property="title" column="title"/>
+	<result property="content" column="content"/>
+	<result property="wireter" column="wireter"/>
+	<collection property="fnames" ofType="String"></collection>
+</resultMap>
 
+<select id="selectOne" resultMap="selectOneResult">
+      select *
+      from
+      tbl_board_sample board left outer join tbl_uploadfile attach
+      on board.bno = attach.board_no
+      where []no = #{pno}
 
-
-<select id="selectOne" resultType="org.kakarrot.domain.BoardVO">
-select * from tbl_board_sample where pno = #{pno}
 </select>
 
 <insert id="insertOne" >
@@ -56,5 +66,10 @@ select seq_board_sample.nextval from dual
   <insert id="insertfile" >
 	insert into tbl_uploadfile 	values(#{board_no}	,#{f_name})
 </insert>
+
+<update id="updateViewCnt">
+update tbl_board_sample set view_count = view_count+1 
+where pno = #{pno} 
+</update>
   
 </mapper>

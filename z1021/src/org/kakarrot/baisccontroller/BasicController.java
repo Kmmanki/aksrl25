@@ -2,8 +2,11 @@ package org.kakarrot.baisccontroller;
 
 import java.io.IOException;
 import java.lang.reflect.Method;
+import java.util.Arrays;
+import java.util.Optional;
 
 import javax.servlet.ServletException;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -62,6 +65,32 @@ public abstract class BasicController extends HttpServlet{
 	
 	
 	
+	}
+	
+	protected Cookie checkCookieExist(HttpServletRequest req, String cookieName) {
+		
+		Cookie[] cks = req.getCookies();
+		
+		if(cks == null || cks.length == 0) {
+			return null;
+		} 
+		
+		Optional<Cookie> result =
+		Arrays.stream(cks)
+		.filter(ck -> ck.getName().equals(cookieName))
+		.findFirst();
+		
+		return result.isPresent()? result.get():null;
+
+	}
+	
+	protected boolean checkCookieValue( Cookie targetCookie, String parameter, String token) {
+		String[] str = targetCookie.getValue().split(token);
+		Optional<String> result = 
+				Arrays.stream(str)
+				.filter(s -> s.equals(parameter))
+				.findFirst();
+		return result.isPresent();
 	}
 	
 	

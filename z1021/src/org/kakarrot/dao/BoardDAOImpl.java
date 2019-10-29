@@ -121,4 +121,17 @@ public class BoardDAOImpl implements BoardDAO {
 		return W;
 	}
 
+	@Override
+	public boolean updateViewCnt(Long pno) {
+		
+		int result = 0;
+		try (SqlSession session = sqlsessionfactory.openSession()) {
+			result = session.insert("org.kakarrot.dao.BoardMapper.updateViewCnt", pno);
+			session.commit();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}		
+		return result == 1;
+	}
+
 }

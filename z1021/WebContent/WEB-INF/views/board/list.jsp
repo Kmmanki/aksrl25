@@ -26,6 +26,7 @@ border-radius : 0.3em;
 ${vo.pno}
 <a href="/board/view?pno=${vo.pno}&page=${page.page}" >${vo.title}</a>
 ${vo.writer}
+${vo.view_count}
 <br>
 </c:forEach>
 <br>
